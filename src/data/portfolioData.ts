@@ -27,8 +27,6 @@ I enjoy solving complex technical problems and building practical, scalable solu
   ],
   contacts: {
     email: 'archishaghanshani@gmail.com',
-    phone: '+91-7895203180',
-    phoneRaw: '+917895203180',
     linkedin: 'https://www.linkedin.com/in/archisha-ghanshani-a49620252/',
     github: 'https://github.com/archisha-g',
   },
