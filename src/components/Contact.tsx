@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import { Mail, ArrowUpRight, Copy, Check, Phone } from 'lucide-react';
+import { Mail, ArrowUpRight, Copy, Check } from 'lucide-react';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -103,17 +103,7 @@ export const Contact: React.FC = () => {
                 </a>
               </div>
 
-              {/* Phone */}
-              <div className="channel-item">
-                <span className="channel-label font-mono">PHONE</span>
-                <a
-                  href={`tel:${PERSONAL_INFO.contacts.phoneRaw}`}
-                  className="channel-value channel-link"
-                >
-                  <Phone size={14} className="channel-icon" aria-hidden="true" />
-                  <span>{PERSONAL_INFO.contacts.phone}</span>
-                </a>
-              </div>
+            
             </div>
           </div>
         </div>
