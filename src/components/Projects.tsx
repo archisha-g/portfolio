@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { Project } from '../types';
 import { PROJECTS_DATA } from '../data/portfolioData';
 import { NeuroScriptVisual } from './NeuroScriptVisual';
+import { SmartCompressVisual } from './SmartCompressVisual';
 import { SentinelVisual } from './SentinelVisual';
 import { ProjectCard } from './ProjectCard';
 import { ProjectModal } from './ProjectModal';
@@ -27,10 +28,10 @@ export const Projects: React.FC = () => {
             </p>
           </div>
 
-          <div className="projects-counter-badge" aria-label="Total projects: 6">
+          <div className="projects-counter-badge" aria-label="Total projects: 7">
             <span className="current-count font-mono">01</span>
             <span className="count-slash font-mono">/</span>
-            <span className="total-count font-mono">06</span>
+            <span className="total-count font-mono">07</span>
           </div>
         </div>
 
@@ -40,6 +41,15 @@ export const Projects: React.FC = () => {
             if (project.id === 'neuroscript') {
               return (
                 <NeuroScriptVisual
+                  key={project.id}
+                  project={project}
+                  onOpenDetails={(p) => setSelectedModalProject(p)}
+                />
+              );
+            }
+            if (project.id === 'smartcompress') {
+              return (
+                <SmartCompressVisual
                   key={project.id}
                   project={project}
                   onOpenDetails={(p) => setSelectedModalProject(p)}

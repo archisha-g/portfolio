@@ -1,4 +1,4 @@
-import type { Project, ExperienceItem, AwardItem, SkillCategory, EducationInfo, ResearchTopic } from '../types';
+import type { Project, ExperienceItem, AwardItem, SkillCategory, EducationInfo, ResearchTopic, ResearchEntry } from '../types';
 
 export const PERSONAL_INFO = {
   name: 'ARCHISHA GHANSHANI',
@@ -23,7 +23,6 @@ I enjoy solving complex technical problems and building practical, scalable solu
     { label: 'Education', value: 'B.Tech. CSE, Artificial Intelligence' },
     { label: 'Experience', value: 'Software • AI/ML • Product' },
     { label: 'Location', value: 'Meerut, India' },
-    { label: 'Languages', value: 'English • Hindi' },
   ],
   contacts: {
     email: 'archishaghanshani@gmail.com',
@@ -92,8 +91,36 @@ pipeline TextClassifier {
     },
   },
   {
-    id: 'sentinel',
+    id: 'smartcompress',
     number: '02',
+    name: 'SmartCompress FS',
+    subtitle: 'Adaptive file system with intelligent automatic compression.',
+    description:
+      'A Python-based intelligent file-system utility that optimizes disk usage by automatically identifying and compressing suitable files when available storage falls below a configurable threshold. Combines real-time disk monitoring, intelligent file prioritization, lossless Gzip/Zlib compression, JSON-based metadata management, and a Tkinter GUI into a single unified file-management workflow.',
+    technologies: ['Python', 'Gzip/Zlib', 'Tkinter', 'JSON', 'Disk I/O'],
+    liveUrl: 'https://smartcompress-nine.vercel.app/',
+    isFeatured: true,
+    details: {
+      overview:
+        'SmartCompress FS addresses the challenge of low-storage and resource-constrained environments by automating the compression lifecycle. The system continuously monitors available disk space and triggers a prioritized compression pipeline when storage falls below a defined threshold, reducing the need for manual cleanup.',
+      architecture: [
+        'Real-time disk space monitoring with configurable threshold triggers',
+        'Intelligent file prioritization by size and last-access time for optimal compression candidates',
+        'Lossless compression via Gzip and Zlib with compressed-file marking to prevent redundant operations',
+        'JSON-based metadata mapping preserving original file paths and types for reliable restoration',
+        'Tkinter-based GUI displaying system operations and enabling manual compression/decompression',
+        'Structured logging for full traceability of all compression and decompression events',
+      ],
+      outcomes: [
+        'Automated disk cleanup pipeline with zero manual intervention required',
+        'Live deployment with GUI interface accessible at smartcompress-nine.vercel.app',
+        'Reliable lossless restoration via metadata-driven decompression workflow',
+      ],
+    },
+  },
+  {
+    id: 'sentinel',
+    number: '03',
     name: 'Sentinel',
     subtitle: 'AI-powered threat detection and response system.',
     description:
@@ -280,15 +307,7 @@ export const AWARDS_DATA: AwardItem[] = [
       },
     ],
   },
-  {
-    id: 'award-paper',
-    year: '2026',
-    title: 'Provisionally Accepted Research Paper',
-    organization: 'IEEE ICAITPR 2026',
-    description:
-      'Research paper provisionally accepted at IEEE ICAITPR 2026, recognizing research work in artificial intelligence and technology.',
-    badge: 'RESEARCH',
-  },
+
   {
     id: 'award-placement',
     year: '2026',
@@ -430,3 +449,48 @@ export const EDUCATION_DATA: EducationInfo = {
   specialization: 'Computer Science Engineering, Artificial Intelligence',
   period: 'September 2022 — June 2026',
 };
+
+export const RESEARCH_ENTRIES_DATA: ResearchEntry[] = [
+  {
+    id: 'ieee-icaitpr-2026',
+    title: 'Stage-Level Latency Decomposition of a Tactical Intelligence Pipeline with Hosted Vision Language Inference',
+    subtitle:
+      'IEEE ICAITPR 2026 — Provisionally Accepted',
+    type: 'PAPER',
+    venue: 'IEEE International Conference on AI, Technology, Policy and Research 2026',
+    venueShort: 'IEEE ICAITPR 2026',
+    status: 'PROVISIONALLY ACCEPTED',
+    year: '2026',
+    abstract:
+      'Transport latency has been a traditional way of assessing performance of tactical monitoring systems, and persistent bi-directional transport links have usually been preferred as a result. This work argues that transport latency is not the main metric for responsiveness once a machine vision pipeline has been integrated into the perception-to-decision chain. A three-level tactical intelligence architecture is proposed with frames captured by field agents, classification of weapons and crowds using a hosted vision language model, and broadcasting alerts via WebSocket connection to web-based command dashboards. During 7 observed cycles, the median cycle duration was 10,942 ms — with 52.7% being a configured delay and 45.8% being remote inference, summing to 98.4%. Alert transmission took 0.21 ms (0.0013% of cycle time), while delivery to the command dashboard over the persistent connection took a median of 0.71 ms.',
+    keyFindings: [
+      'Transport layer accounts for only 0.0013% of total cycle latency — inference and capture dominate',
+      'Trained object detector excluded: good accuracy on high-res images but failed on real-time low-res streams and lacked scene reasoning',
+      'Vision-language model provided both classification and domain-aware tactical output in a single pass',
+      'Three hidden latency properties identified: freezing after detection, unpaired images, and lack of offline path',
+      'Transport selection should be driven by overhead and push properties, not responsiveness',
+    ],
+    tags: ['Tactical Intelligence', 'Vision-Language Models', 'WebSocket', 'Latency Decomposition', 'Counter-Terrorism', 'Situational Awareness'],
+  },
+  {
+    id: 'attribution-not-authority',
+    title: 'Attribution, Not Authority: CoT Faithfulness in Reasoning Models',
+    subtitle: 'What Makes a Model Adopt a False Answer',
+    type: 'STUDY',
+    venue: 'Personal Research Project',
+    venueShort: 'Personal Research Project',
+    status: 'INDEPENDENT RESEARCH',
+    year: '2026',
+    abstract:
+      'The standard trick for testing unfaithful chain-of-thought introduces an authority cue ("a Stanford professor believes the answer is C") and checks whether the answer shifts without the reasoning acknowledging it. Using Qwen3-27B across 216 calls, the professor trick had zero effect (0/21 valid responses). The key finding reframes the question: it is not authority that moves the model, but attribution. An unattributed factual assertion is adopted 66% of the time; the identical claim clearly attributed to a named person is adopted 0% of the time. All 9 manually verified trace cases showed the model overriding its own correct calculations — and admitting it — making the influence transparent to any CoT monitor.',
+    keyFindings: [
+      'Authority framing (professor trick) had zero effect — model explicitly flagged it as an adversarial test',
+      'Unattributed claim: 66% uptake. Same claim attributed to a person: 0% — a monotone relationship',
+      'All 9 influenced traces were faithful: the model openly stated it was deferring to the external claim',
+      'The problem is not hidden reasoning — it is uncritical deference to unsupported, unattributed assertions',
+      'Arcuschin et al. contradiction test replicated at 0/40, confirming 95% CI ≤ 9% on this model',
+      'Neither published faithfulness screening method would have caught this 66% uptake pattern',
+    ],
+    tags: ['AI Safety', 'Chain-of-Thought', 'Faithfulness', 'Sycophancy', 'Mechanistic Interpretability', 'Qwen3'],
+  },
+];

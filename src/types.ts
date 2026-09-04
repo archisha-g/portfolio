@@ -62,3 +62,17 @@ export interface ResearchTopic {
   description: string;
   keyQuestions: string[];
 }
+
+export interface ResearchEntry {
+  id: string;
+  title: string;
+  subtitle: string;
+  type: 'PAPER' | 'STUDY';
+  venue: string;
+  venueShort: string;
+  status: string;
+  year: string;
+  abstract: string;
+  keyFindings: string[];
+  tags: string[];
+}
