@@ -45,8 +45,8 @@ export const App: React.FC = () => {
         <About />
         <ProfileStrip />
         <Experience />
-        <Projects />
         <ResearchExploring />
+        <Projects />
         <Skills />
         <Recognition />
         <Education />

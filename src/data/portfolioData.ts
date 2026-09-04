@@ -53,7 +53,7 @@ export const PROJECTS_DATA: Project[] = [
     description:
       'Developed a custom programming language and compiler with an intuitive high-level syntax for AI and natural language processing workflows. Built the complete compilation pipeline from scratch, including lexical analysis, parsing, semantic analysis, and Three-Address Code generation. Developed a FastAPI backend and interactive web-based IDE for writing, compiling, and executing NeuroScript programs.',
     technologies: ['Python', 'NLP', 'Compiler Design', 'FastAPI', 'JavaScript'],
-    liveUrl: 'https://neuroscript-live.onrender.com/',
+    liveUrl: 'https://neuroscript-live.vercel.app/',
     isFeatured: true,
     pipelineStages: [
       'SOURCE CODE',
