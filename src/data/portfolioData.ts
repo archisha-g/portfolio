@@ -9,7 +9,7 @@ export const PERSONAL_INFO = {
 
 I've worked across frontend, full-stack, and mobile development, and have led the development of a mobile application from scratch as a team lead.
 
-My work spans compiler design, NLP, cybersecurity, computer vision, and AI-powered applications. I've also competed in and won multiple national hackathons and have research experience in artificial intelligence.
+My work spans compiler design, NLP, cybersecurity, computer vision, and AI-powered applications. I've also won multiple national hackathons, have a first-author IEEE paper (provisionally accepted), and maintain an open source disk-compression tool published on Ubuntu's Snap Store.
 
 I enjoy solving complex technical problems and building practical, scalable solutions that combine strong engineering fundamentals with AI.`,
   status: {
@@ -34,13 +34,13 @@ I enjoy solving complex technical problems and building practical, scalable solu
 export const CURRENT_RESEARCH: ResearchTopic = {
   title: 'Mechanistic Interpretability',
   area: 'AI Systems & Internal Representations',
-  status: 'IN PROGRESS',
+  status: 'EXPLORING',
   description:
-    'Exploring how neural networks represent and process information internally through hands-on experiments in mechanistic interpretability.',
+    'Reading and running small experiments, when time allows, to understand how neural networks represent and process information internally.',
   keyQuestions: [
-    'Tracing circuit activations and feature superposition across transformer attention layers',
-    'Analyzing causal intervention and activation patching on internal model representations',
-    'Bridging empirical machine learning engineering with principled mechanistic understanding',
+    'How features are represented inside transformer layers (superposition)',
+    'What causal interventions such as activation patching reveal about a model',
+    'How reasoning traces relate to what a model actually computes',
   ],
 };
 
@@ -49,10 +49,10 @@ export const PROJECTS_DATA: Project[] = [
     id: 'neuroscript',
     number: '01',
     name: 'NeuroScript',
-    subtitle: 'A programming language and compiler designed around AI and natural language workflows.',
+    subtitle: 'A programming language, compiler and virtual machine built from scratch.',
     description:
-      'Developed a custom programming language and compiler with an intuitive high-level syntax for AI and natural language processing workflows. Built the complete compilation pipeline from scratch, including lexical analysis, parsing, semantic analysis, and Three-Address Code generation. Developed a FastAPI backend and interactive web-based IDE for writing, compiling, and executing NeuroScript programs.',
-    technologies: ['Python', 'NLP', 'Compiler Design', 'FastAPI', 'JavaScript'],
+      'NeuroScript is a small general-purpose language whose keywords mimic human thought: remember to declare a variable, feel / otherwise for if / else, think while for loops, and speak / shout / whisper to print. Built entirely in Python with no compiler frameworks, the pipeline goes from a regex-based lexer (with indentation tracking for Python-style blocks) through a recursive-descent parser, semantic analysis with a symbol table, three-address code generation for control flow, a bytecode stage, and a stack-based virtual machine. A Streamlit interface shows tokens, AST, three-address code, bytecode and program output. Built in 2025.',
+    technologies: ['Python', 'Compiler Design', 'Virtual Machines', 'Streamlit'],
     liveUrl: 'https://neuroscript-live.vercel.app/',
     isFeatured: true,
     pipelineStages: [
@@ -61,32 +61,33 @@ export const PROJECTS_DATA: Project[] = [
       'PARSER / AST',
       'SEMANTIC ANALYSIS',
       'THREE-ADDRESS CODE',
-      'EXECUTION ENGINE',
+      'BYTECODE + VM',
     ],
-    codeSample: `// Sample NeuroScript AI Pipeline
-pipeline TextClassifier {
-  input text: String
-  model = load("transformer/nlp-core")
-  
-  transform tokens = tokenize(text, clean: true)
-  prediction = model.classify(tokens)
-  
-  emit prediction.confidence > 0.85 ? prediction.label : "uncertain"
-}`,
+    codeSample: `# NeuroScript: code the way you think
+remember energy = 3
+think while energy > 0
+    speak energy
+    update energy = energy - 1
+feel energy == 0
+    shout "out of energy"
+otherwise
+    whisper "still going"`,
     details: {
       overview:
-        'NeuroScript addresses the gap between general-purpose languages and specialized AI pipeline development by creating a dedicated domain-specific language with first-class primitives for data streaming, tokenization, and model evaluation.',
+        'NeuroScript is a small general-purpose language built entirely in Python with no compiler frameworks or parser generators. Its keywords are designed to read like human thought: remember, feel, otherwise, think while, speak, shout, whisper, laugh, murmur, listen, panic, pause, sleep. A Streamlit interface shows every compilation stage interactively.',
       architecture: [
-        'Custom Lexer tokenizing source code with regex token tables and line/column tracking',
-        'Recursive Descent Parser validating grammar and building the Abstract Syntax Tree (AST)',
-        'Semantic Analysis phase resolving variable scopes and type compatibility',
-        'Intermediate Representation generator emitting linear Three-Address Code (3AC) quadruples',
-        'FastAPI asynchronous runtime backend executing compiled instructions',
-        'Interactive browser-based IDE with live compiler diagnostic feedback',
+        'Regex-based lexer that tracks indentation with a stack, emitting INDENT and DEDENT tokens for Python-style blocks',
+        'Recursive-descent parser that builds an Abstract Syntax Tree from the token stream',
+        'Semantic analysis with a symbol table that rejects undeclared variables (no type checking or scope resolution)',
+        'Three-address code generator that lowers if / else and while loops into labels and conditional jumps (JZ / JMP)',
+        'Bytecode generator that translates three-address code into stack-machine instructions',
+        'Stack-based virtual machine with PUSH, LOAD, STORE, arithmetic and comparison ops, and jump instructions',
       ],
       outcomes: [
-        'Complete end-to-end compiler implemented from fundamental computer science principles',
-        'Full web-based playground enabling live compilation, AST inspection, and execution',
+        'Complete end-to-end compiler and VM implemented from scratch in Python, with no external compiler frameworks',
+        'Streamlit UI showing tokens, AST, three-address code, bytecode and program output side by side',
+        'The hardest stage was three-address code generation for control flow (if / else and while loops into labels and jumps)',
+        'Live demo: https://neuroscript-live.vercel.app/',
       ],
     },
   },
@@ -94,27 +95,29 @@ pipeline TextClassifier {
     id: 'smartcompress',
     number: '02',
     name: 'SmartCompress FS',
-    subtitle: 'Adaptive file system with intelligent automatic compression.',
+    subtitle: 'Open source tool that compresses your least-used files when disk space runs low. Published on the Snap Store.',
     description:
-      'A Python-based intelligent file-system utility that optimizes disk usage by automatically identifying and compressing suitable files when available storage falls below a configurable threshold. Combines real-time disk monitoring, intelligent file prioritization, lossless Gzip/Zlib compression, JSON-based metadata management, and a Tkinter GUI into a single unified file-management workflow.',
-    technologies: ['Python', 'Gzip/Zlib', 'Tkinter', 'JSON', 'Disk I/O'],
-    liveUrl: 'https://smartcompress-nine.vercel.app/',
+      "SmartCompress FS is an open source (MIT) Python tool that monitors disk usage and automatically compresses the coldest, largest files when free space falls below a configurable threshold. Files are ranked by last-access time and then size; gzip compression is applied while skipping .gz, .zlib, .log and .tmp files and the tool's own log. A separate Tkinter desktop app handles manual gzip / zlib compression and restoration using a JSON metadata store that preserves original paths and timestamps. Published on Ubuntu's Snap Store as a strictly confined snap: sudo snap install smartcompress.",
+    technologies: ['Python', 'Linux', 'snapcraft', 'Gzip/Zlib', 'Tkinter'],
+    liveUrl: 'https://snapcraft.io/smartcompress',
     isFeatured: true,
     details: {
       overview:
-        'SmartCompress FS addresses the challenge of low-storage and resource-constrained environments by automating the compression lifecycle. The system continuously monitors available disk space and triggers a prioritized compression pipeline when storage falls below a defined threshold, reducing the need for manual cleanup.',
+        "SmartCompress FS addresses low-storage and resource-constrained environments by automating the compression lifecycle. The CLI monitor watches a directory and triggers prioritised compression when free space falls below a threshold. A separate Tkinter app lets users compress and restore files manually. Open source under the MIT licence, with versions v1.0.0 and v1.1.0 on GitHub (https://github.com/archisha-g/smartcompress) and published on the Snap Store (https://snapcraft.io/smartcompress).",
       architecture: [
-        'Real-time disk space monitoring with configurable threshold triggers',
-        'Intelligent file prioritization by size and last-access time for optimal compression candidates',
-        'Lossless compression via Gzip and Zlib with compressed-file marking to prevent redundant operations',
-        'JSON-based metadata mapping preserving original file paths and types for reliable restoration',
-        'Tkinter-based GUI displaying system operations and enabling manual compression/decompression',
-        'Structured logging for full traceability of all compression and decompression events',
+        'CLI monitor with --watch-dir (required), --threshold (default 10% free), --disk (default: disk holding the watched folder), and --interval (default 60 seconds) options',
+        'File ranking by last-access time, then size: coldest and largest files are compressed first',
+        'Lossless gzip compression; skips .gz, .zlib, .log and .tmp files and never compresses its own log',
+        'JSON metadata store recording original path and timestamps for byte-for-byte restoration',
+        'Separate Tkinter desktop app for manual gzip / zlib compression and restoration',
+        "Published as a strictly confined snap (base core24, home folder access only) on Ubuntu's Snap Store",
       ],
       outcomes: [
-        'Automated disk cleanup pipeline with zero manual intervention required',
-        'Live deployment with GUI interface accessible at smartcompress-nine.vercel.app',
-        'Reliable lossless restoration via metadata-driven decompression workflow',
+        'Published on the Snap Store: https://snapcraft.io/smartcompress (install: sudo snap install smartcompress)',
+        'Source code on GitHub under MIT licence: https://github.com/archisha-g/smartcompress (releases v1.0.0 and v1.1.0)',
+        'Up to 60% storage reduction on text and CSV files, with byte-for-byte restoration via the metadata store',
+        "Two sandbox bugs found and fixed during snap testing: the tool was reporting 100% free space (inside a strict snap, '/' is the snap's own read-only filesystem, so it now measures the disk holding the watched folder), and it was compressing its own log file",
+        'Built 2025, packaged and published to the Snap Store in 2026',
       ],
     },
   },
@@ -145,13 +148,12 @@ pipeline TextClassifier {
       ],
       outcomes: [
         'National Hackathon Winner project (QubitX 2025 by Team SenaDrishti)',
-        'Significantly accelerated incident analysis by delivering contextual natural language briefings',
       ],
     },
   },
   {
     id: 'brain-tumour-detection',
-    number: '03',
+    number: '04',
     name: 'Brain Tumour Detection',
     subtitle: 'Deep learning medical image classification.',
     description:
@@ -173,7 +175,7 @@ pipeline TextClassifier {
   },
   {
     id: 'image-deblurring',
-    number: '04',
+    number: '05',
     name: 'Image Deblurring',
     subtitle: 'Computer vision restoration system.',
     description:
@@ -195,7 +197,7 @@ pipeline TextClassifier {
   },
   {
     id: 'hate-speech-detection',
-    number: '05',
+    number: '06',
     name: 'Hate Speech Detection',
     subtitle: 'NLP text classification pipeline.',
     description:
@@ -217,7 +219,7 @@ pipeline TextClassifier {
   },
   {
     id: 'fooddukaan',
-    number: '06',
+    number: '07',
     name: 'FoodDukaan',
     subtitle: 'Full-stack food ordering platform.',
     description:
@@ -243,20 +245,20 @@ export const EXPERIENCES_DATA: ExperienceItem[] = [
   {
     id: 'exp-1',
     number: '01',
-    role: 'Technical Operations & Data Manager',
+    role: 'Data & Operations Analyst',
     company: 'U W and Associates',
     location: 'Meerut, India',
-    period: 'June 2026 — Present',
+    period: 'June 2026 to Present',
     description:
-      'Oversee technical operations and data management across business processes, combining technology, data, and operational workflows to improve efficiency, visibility, and decision-making. Manage and digitize processes across inventory, procurement, sales, accounting, and reporting, while maintaining and analyzing operational data to improve reporting and business insight. Coordinate technology and process improvements across day-to-day operations.',
-    skillsHighlight: ['Process Digitization', 'Workflow Automation', 'Data Management', 'Operational Systems'],
+      'Built structured, queryable datasets from Tally ERP exports, merging three financial years of receivables into one table of party, amount and days past due, and recovering due dates the source export masked. My analysis of payment patterns led to about INR 700,000 recovered from overdue private-sector accounts, with INR 1.2 million more in follow-up.',
+    skillsHighlight: ['Data Analysis', 'Tally ERP', 'Data Cleaning', 'Receivables Analysis'],
   },
   {
     id: 'exp-2',
     number: '02',
     role: 'Mobile Application Developer & Team Lead',
     company: 'Fix Dukaan',
-    period: 'January 2025 — August 2025',
+    period: 'January 2025 to August 2025',
     description:
       "Led the development team in building Fix Dukaan's mobile application from scratch, taking the product from initial requirements and architecture through development, testing, and refinement. Developed the cross-platform application using React Native, integrated backend APIs and database services, coordinated development tasks, and guided the team through implementation, debugging, and feature development.",
     skillsHighlight: ['React Native', 'Team Leadership', 'API Integration', 'Mobile Architecture'],
@@ -266,7 +268,7 @@ export const EXPERIENCES_DATA: ExperienceItem[] = [
     number: '03',
     role: 'Full Stack Developer Intern',
     company: 'TBI-GEU University Program',
-    period: 'November 2024 — January 2025',
+    period: 'November 2024 to January 2025',
     description:
       'Developed full-stack web applications using the MERN stack across frontend, backend, and database layers. Built and integrated RESTful APIs, implemented application functionality, worked with database systems, and developed responsive interfaces connected to backend services.',
     skillsHighlight: ['MERN Stack', 'REST APIs', 'MongoDB', 'Responsive Interfaces'],
@@ -276,7 +278,7 @@ export const EXPERIENCES_DATA: ExperienceItem[] = [
     number: '04',
     role: 'Front End Developer Intern',
     company: "Tyson's Legal Allies",
-    period: 'March 2024 — April 2024',
+    period: 'March 2024 to April 2024',
     description:
       'Developed responsive and user-friendly web interfaces using HTML, CSS, and JavaScript. Translated design requirements into functional and visually consistent web experiences while improving responsiveness, usability, and cross-device compatibility.',
     skillsHighlight: ['HTML5 / CSS3', 'JavaScript', 'UI Engineering', 'Cross-Device Usability'],
@@ -286,7 +288,7 @@ export const EXPERIENCES_DATA: ExperienceItem[] = [
 export const AWARDS_DATA: AwardItem[] = [
   {
     id: 'award-women-in-tech',
-    year: '2026',
+    year: '2025',
     title: 'Top 5 Women in Tech Medal',
     organization: 'Graph-E-Thon 2.0',
     description:
@@ -295,9 +297,9 @@ export const AWARDS_DATA: AwardItem[] = [
     media: [
       {
         type: 'photo',
-        title: 'Graph-E-Thon 2.0 Golden Trophy & Medal',
+        title: 'Graph-E-Thon 2.0 Trophy & Medal',
         url: '/recognition/graphtheon_trophy.jpg',
-        caption: 'Archisha with the Graph-E-Thon 2.0 Winner Trophy & Top 5 Women in Tech Medal',
+        caption: 'Archisha with the Graph-E-Thon 2.0 3rd Place Trophy & Top 5 Women in Tech Medal',
       },
       {
         type: 'photo',
@@ -328,7 +330,7 @@ export const AWARDS_DATA: AwardItem[] = [
   {
     id: 'award-qubitx',
     year: '2025',
-    title: 'Winner — QubitX National Hackathon',
+    title: 'Winner: QubitX National Hackathon',
     organization: 'GL Bajaj Group / HackWithIndia',
     description:
       'Secured 1st place among 400+ participating teams across India for developing Sentinel (AI-powered threat detection system) with Team SenaDrishti.',
@@ -338,14 +340,14 @@ export const AWARDS_DATA: AwardItem[] = [
         type: 'certificate',
         title: 'QubitX National Hackathon Winner Certificate',
         url: '/recognition/qubitx_cert.jpg',
-        caption: 'Certificate of Achievement — Position Winner (Team SenaDrishti, 400+ Teams)',
+        caption: 'Certificate of Achievement: Position Winner (Team SenaDrishti, 400+ Teams)',
       },
     ],
   },
   {
     id: 'award-hackaccino',
     year: '2025',
-    title: 'Winner — Hackaccino 3.0',
+    title: 'Winner: Hackaccino 3.0',
     organization: 'Bennett University',
     description:
       'Secured 1st place through the development and presentation of a technical solution at Bennett University.',
@@ -368,7 +370,7 @@ export const AWARDS_DATA: AwardItem[] = [
   {
     id: 'award-gna',
     year: '2025',
-    title: 'First Overall — GNA Hackathon 3.0',
+    title: 'First Overall: GNA Hackathon 3.0',
     organization: 'GNA University',
     description:
       'Secured 1st position overall in the national-level GNA Hackathon 3.0 for innovative technical engineering.',
@@ -378,14 +380,14 @@ export const AWARDS_DATA: AwardItem[] = [
         type: 'certificate',
         title: 'GNA Hackathon 3.0 Certificate',
         url: '/recognition/gna_hackathon_cert.jpg',
-        caption: 'Certificate of Participation & First Overall Position — GNA University',
+        caption: 'Certificate of Participation & First Overall Position: GNA University',
       },
     ],
   },
   {
     id: 'award-kriyeta',
     year: '2025',
-    title: '2nd Position — KRIYETA 4.0',
+    title: '2nd Position: KRIYETA 4.0',
     organization: 'IEEE & Acropolis Group',
     description:
       'Secured 2nd position in the 48-hour national hackathon KRIYETA 4.0 organized by IEEE Student Branch.',
@@ -395,14 +397,14 @@ export const AWARDS_DATA: AwardItem[] = [
         type: 'certificate',
         title: 'KRIYETA 4.0 Certificate (2nd Position)',
         url: '/recognition/kriyeta_cert_2nd.jpg',
-        caption: 'Certificate of Appreciation — 2nd Position in 48-hour hackathon',
+        caption: 'Certificate of Appreciation: 2nd Position in 48-hour hackathon',
       },
     ],
   },
   {
     id: 'award-graphtheon',
     year: '2025',
-    title: '3rd Position — Graph-E-Thon 2.0',
+    title: '3rd Position: Graph-E-Thon 2.0',
     organization: 'Graphic Era University',
     description:
       'Secured 3rd position in Graph-E-Thon 2.0 National Level Hackathon with Team Resineon.',
@@ -412,7 +414,7 @@ export const AWARDS_DATA: AwardItem[] = [
         type: 'certificate',
         title: 'Graph-E-Thon 2.0 Certificate (3rd Position)',
         url: '/recognition/graphtheon_cert.jpg',
-        caption: 'Certificate of Achievement — 3rd Position, Graph-E-Thon 2.0',
+        caption: 'Certificate of Achievement: 3rd Position, Graph-E-Thon 2.0',
       },
       {
         type: 'photo',
@@ -428,6 +430,10 @@ export const SKILLS_DATA: SkillCategory[] = [
   {
     category: 'Languages',
     skills: ['Python', 'Java', 'C/C++', 'JavaScript', 'TypeScript', 'SQL'],
+  },
+  {
+    category: 'Linux & Open Source',
+    skills: ['Ubuntu', 'Bash', 'Git', 'snapcraft (snap packaging)'],
   },
   {
     category: 'Web & Application Systems',
@@ -446,8 +452,8 @@ export const SKILLS_DATA: SkillCategory[] = [
 export const EDUCATION_DATA: EducationInfo = {
   institution: 'Graphic Era University',
   degree: 'Bachelor of Technology',
-  specialization: 'Computer Science Engineering, Artificial Intelligence',
-  period: 'September 2022 — June 2026',
+  specialization: 'Computer Science Engineering, Artificial Intelligence | CGPA 8.39/10',
+  period: 'September 2022 to May 2026',
 };
 
 export const RESEARCH_ENTRIES_DATA: ResearchEntry[] = [
@@ -455,16 +461,16 @@ export const RESEARCH_ENTRIES_DATA: ResearchEntry[] = [
     id: 'ieee-icaitpr-2026',
     title: 'Stage-Level Latency Decomposition of a Tactical Intelligence Pipeline with Hosted Vision Language Inference',
     subtitle:
-      'IEEE ICAITPR 2026 — Provisionally Accepted',
+      'IEEE ICAITPR 2026 (Provisionally Accepted)',
     type: 'PAPER',
     venue: 'IEEE International Conference on AI, Technology, Policy and Research 2026',
     venueShort: 'IEEE ICAITPR 2026',
     status: 'PROVISIONALLY ACCEPTED',
     year: '2026',
     abstract:
-      'Transport latency has been a traditional way of assessing performance of tactical monitoring systems, and persistent bi-directional transport links have usually been preferred as a result. This work argues that transport latency is not the main metric for responsiveness once a machine vision pipeline has been integrated into the perception-to-decision chain. A three-level tactical intelligence architecture is proposed with frames captured by field agents, classification of weapons and crowds using a hosted vision language model, and broadcasting alerts via WebSocket connection to web-based command dashboards. During 7 observed cycles, the median cycle duration was 10,942 ms — with 52.7% being a configured delay and 45.8% being remote inference, summing to 98.4%. Alert transmission took 0.21 ms (0.0013% of cycle time), while delivery to the command dashboard over the persistent connection took a median of 0.71 ms.',
+      'Transport latency has been a traditional way of assessing performance of tactical monitoring systems, and persistent bi-directional transport links have usually been preferred as a result. This work argues that transport latency is not the main metric for responsiveness once a machine vision pipeline has been integrated into the perception-to-decision chain. A three-level tactical intelligence architecture is proposed with frames captured by field agents, classification of weapons and crowds using a hosted vision language model, and broadcasting alerts via WebSocket connection to web-based command dashboards. During 7 observed cycles, the median cycle duration was 10,942 ms (with 52.7% being a configured delay and 45.8% being remote inference, summing to 98.4%). Alert transmission took 0.21 ms (0.0013% of cycle time), while delivery to the command dashboard over the persistent connection took a median of 0.71 ms.',
     keyFindings: [
-      'Transport layer accounts for only 0.0013% of total cycle latency — inference and capture dominate',
+      'Transport layer accounts for only 0.0013% of total cycle latency; inference and capture dominate',
       'Trained object detector excluded: good accuracy on high-res images but failed on real-time low-res streams and lacked scene reasoning',
       'Vision-language model provided both classification and domain-aware tactical output in a single pass',
       'Three hidden latency properties identified: freezing after detection, unpaired images, and lack of offline path',
@@ -482,12 +488,12 @@ export const RESEARCH_ENTRIES_DATA: ResearchEntry[] = [
     status: 'INDEPENDENT RESEARCH',
     year: '2026',
     abstract:
-      'The standard trick for testing unfaithful chain-of-thought introduces an authority cue ("a Stanford professor believes the answer is C") and checks whether the answer shifts without the reasoning acknowledging it. Using Qwen3-27B across 216 calls, the professor trick had zero effect (0/21 valid responses). The key finding reframes the question: it is not authority that moves the model, but attribution. An unattributed factual assertion is adopted 66% of the time; the identical claim clearly attributed to a named person is adopted 0% of the time. All 9 manually verified trace cases showed the model overriding its own correct calculations — and admitting it — making the influence transparent to any CoT monitor.',
+      'The standard trick for testing unfaithful chain-of-thought introduces an authority cue ("a Stanford professor believes the answer is C") and checks whether the answer shifts without the reasoning acknowledging it. Using Qwen3-27B across 216 calls, the professor trick had zero effect (0/21 valid responses). The key finding reframes the question: it is not authority that moves the model, but attribution. An unattributed factual assertion is adopted 66% of the time; the identical claim clearly attributed to a named person is adopted 0% of the time. All 9 manually verified trace cases showed the model overriding its own correct calculations (and admitting it), making the influence transparent to any CoT monitor.',
     keyFindings: [
-      'Authority framing (professor trick) had zero effect — model explicitly flagged it as an adversarial test',
-      'Unattributed claim: 66% uptake. Same claim attributed to a person: 0% — a monotone relationship',
+      'Authority framing (professor trick) had zero effect; model explicitly flagged it as an adversarial test',
+      'Unattributed claim: 66% uptake. Same claim attributed to a person: 0%, a monotone relationship',
       'All 9 influenced traces were faithful: the model openly stated it was deferring to the external claim',
-      'The problem is not hidden reasoning — it is uncritical deference to unsupported, unattributed assertions',
+      'The problem is not hidden reasoning; it is uncritical deference to unsupported, unattributed assertions',
       'Arcuschin et al. contradiction test replicated at 0/40, confirming 95% CI ≤ 9% on this model',
       'Neither published faithfulness screening method would have caught this 66% uptake pattern',
     ],

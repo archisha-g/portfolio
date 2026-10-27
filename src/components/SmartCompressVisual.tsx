@@ -69,7 +69,7 @@ const DiskMeter: React.FC<{ usedPct: number }> = ({ usedPct }) => {
         <span>DISK USAGE</span>
         <span style={{ color: isCritical ? 'var(--accent-color)' : 'inherit' }}>
           {usedPct}% used
-          {isCritical && ' — THRESHOLD EXCEEDED'}
+          {isCritical && ': THRESHOLD EXCEEDED'}
         </span>
       </div>
       <div className="sc-meter-track" role="progressbar" aria-valuenow={usedPct} aria-valuemin={0} aria-valuemax={100}>

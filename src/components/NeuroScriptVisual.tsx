@@ -10,39 +10,39 @@ interface NeuroScriptVisualProps {
 const COMPILER_STAGES = [
   {
     name: 'SOURCE CODE',
-    description: 'High-level expressive syntax tailored for AI & NLP workflow orchestration',
+    description: 'Human-readable NeuroScript source: keywords mimic human thought (remember, feel, think while, speak, shout, whisper)',
     icon: FileCode,
-    snippet: 'pipeline NLPClassifier {\n  input raw_text: String\n  model = load("transformer/nlp")\n  classify(tokenize(raw_text))\n}',
+    snippet: 'remember energy = 3\nthink while energy > 0\n    speak energy\n    update energy = energy - 1',
   },
   {
     name: 'LEXICAL ANALYSIS',
-    description: 'Custom regex-based tokenizer generating normalized token streams & location spans',
+    description: 'Regex-based lexer tracks indentation with a stack and emits INDENT / DEDENT tokens for Python-style blocks',
     icon: Code,
-    snippet: '[TOKEN_KEYWORD "pipeline", TOKEN_IDENT "NLPClassifier", TOKEN_LBRACE, ...]',
+    snippet: "('KEYWORD', 'remember'), ('IDENT', 'energy'), ('ASSIGN', '='), ('NUMBER', 3),\n('NEWLINE'), ('KEYWORD', 'think'), ('KEYWORD', 'while'), ('IDENT', 'energy'), ...",
   },
   {
     name: 'PARSER (AST)',
-    description: 'Recursive descent parser constructing strongly-typed Abstract Syntax Tree',
+    description: 'Recursive-descent parser builds an Abstract Syntax Tree from the token stream',
     icon: Layers,
-    snippet: 'ASTNode::PipelineDeclaration {\n  id: "NLPClassifier",\n  body: [VarDecl, ModelLoad, TransformCall]\n}',
+    snippet: 'VarDeclaration(energy = Literal(3))\nWhile(BinaryOp(Variable(energy) > Literal(0))):\n  [PrintCommand, Update]',
   },
   {
     name: 'SEMANTIC ANALYSIS',
-    description: 'Scope validation, symbol table registration & static type compatibility checks',
+    description: 'Symbol table rejects undeclared variables; no type checking or scope resolution',
     icon: CheckCircle2,
-    snippet: 'SymbolTable: verified 3 identifiers, 0 type mismatches, model tensors aligned',
+    snippet: 'symbol_table = {energy}\nOK: no undeclared variables',
   },
   {
     name: 'THREE-ADDRESS CODE',
-    description: 'Intermediate representation quad generation (3AC) for machine independence',
+    description: 'Control flow (if / else, while) is lowered into labels and conditional jumps (JZ / JMP)',
     icon: Cpu,
-    snippet: 't1 = tokenize raw_text\nt2 = call load, "transformer/nlp"\nt3 = call classify, t1, t2\nreturn t3',
+    snippet: 'energy = 3\nLABEL L0\nt0 = energy GT 0\nJZ t0 L1\nPRINT energy\nt1 = energy SUB 1\nenergy = t1\nJMP L0\nLABEL L1',
   },
   {
-    name: 'EXECUTION ENGINE',
-    description: 'FastAPI asynchronous sandbox executing TAC instructions & returning telemetry',
+    name: 'BYTECODE + VM',
+    description: 'Bytecode generator feeds a stack-based VM (PUSH, LOAD, STORE, arithmetic and comparison ops, jumps)',
     icon: Play,
-    snippet: 'Status: 200 OK | Latency: 12ms | Output: {"label": "positive", "confidence": 0.94}',
+    snippet: 'PUSH 3\nSTORE energy\nLABEL L0\nLOAD energy\nPUSH 0\nGT\n...\nOutput: 3, 2, 1',
   },
 ];
 
