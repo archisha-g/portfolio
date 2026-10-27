@@ -28,15 +28,6 @@ export const Contact: React.FC = () => {
           <div className="contact-action-area">
             {/* Primary Action Button */}
             <div className="contact-cta-row">
-              <a
-                href={`mailto:${PERSONAL_INFO.contacts.email}`}
-                className="btn btn-primary btn-lg contact-primary-btn"
-                aria-label="Send email to Archisha Ghanshani"
-              >
-                <span>GET IN TOUCH</span>
-                <ArrowUpRight size={18} aria-hidden="true" />
-              </a>
-
               <button
                 onClick={handleCopyEmail}
                 className="btn btn-outline contact-copy-btn"
