@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import { ArrowDownRight, ExternalLink, Mail, MapPin } from 'lucide-react';
+import { ArrowDownRight, ExternalLink, MapPin } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const [timeString, setTimeString] = useState<string>('');
@@ -85,13 +85,7 @@ export const Hero: React.FC = () => {
               <span>View Projects</span>
               <ArrowDownRight size={16} aria-hidden="true" />
             </button>
-            <button
-              onClick={() => handleScrollTo('contact')}
-              className="btn btn-outline hero-btn"
-            >
-              <span>Get in Touch</span>
-              <Mail size={15} aria-hidden="true" />
-            </button>
+
           </div>
 
           <div className="hero-secondary-links">
